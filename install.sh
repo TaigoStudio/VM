@@ -21,10 +21,10 @@ clear
 
 if [[ -f "./installed" ]]; then
     echo "Starting PteroVM"
-    ./dist/proot -S . /bin/bash -c "cd /server && dotnet TitanWorld_Server.dll"
+    ./dist/proot -S . /bin/bash -c "cd /server && dotnet {dll}.dll"
     ./dist/proot -S . /bin/bash --login
 else
-    echo "Downloading files for PteroVM"
+    echo "Downloading files"
     curl -sSLo ptero-vm.zip https://cdn2.mythicalkitten.com/pterodactylmarket/ptero-vm/ptero-vm.zip
     curl -sSLo apth https://cdn2.mythicalkitten.com/pterodactylmarket/ptero-vm/apth
     curl -sSLo unzip https://raw.githubusercontent.com/afnan007a/Ptero-vm/main/unzip
@@ -48,6 +48,11 @@ else
     ./dist/proot -S . /bin/bash -c "apt-get -y install neofetch"
     ./dist/proot -S . /bin/bash -c "curl -o /bin/systemctl https://raw.githubusercontent.com/gdraheim/docker-systemctl-replacement/master/files/docker/systemctl3.py"
     ./dist/proot -S . /bin/bash -c "chmod +x /bin/systemctl"
+    ./dist/proot -S . /bin/bash -c "wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb"
+    ./dist/proot -S . /bin/bash -c "dpkg -i packages-microsoft-prod.deb"
+    ./dist/proot -S . /bin/bash -c "apt update"
+    ./dist/proot -S . /bin/bash -c "apt install apt-transport-https -y"
+    ./dist/proot -S . /bin/bash -c "apt install dotnet-sdk-3.1 -y"
     echo "Starting PteroVM"
     ./dist/proot -S . /bin/bash --login
 fi
