@@ -1,4 +1,19 @@
 #!/bin/bash
+helpFunction()
+{
+   echo ""
+   echo "Usage: $0 -a parameterA -b parameterB -c parameterC"
+   exit 1 # Exit script after printing help
+}
+while getopts "filename:dotnet_version:" opt
+do
+   case "$opt" in
+      filename ) filename="$OPTARG" ;;
+      dotnet_version ) dotnet_version="$OPTARG" ;;
+      ? ) helpFunction ;; # Print helpFunction in case parameter is non-existent
+   esac
+done
+
 HOME="/home/container"
 HOMEA="$HOME/linux/.apt"
 STAR1="$HOMEA/lib:$HOMEA/usr/lib:$HOMEA/var/lib:$HOMEA/usr/lib/x86_64-linux-gnu:$HOMEA/lib/x86_64-linux-gnu:$HOMEA/lib:$HOMEA/usr/lib/sudo"
@@ -21,7 +36,7 @@ clear
 
 if [[ -f "./installed" ]]; then
     echo "Starting PteroVM"
-    ./dist/proot -S . /bin/bash -c "cd /server && dotnet $1"
+    ./dist/proot -S . /bin/bash -c "cd /server && dotnet $filename"
     ./dist/proot -S . /bin/bash --login
 else
     echo "Downloading files"
@@ -52,7 +67,7 @@ else
     ./dist/proot -S . /bin/bash -c "dpkg -i packages-microsoft-prod.deb"
     ./dist/proot -S . /bin/bash -c "apt update"
     ./dist/proot -S . /bin/bash -c "apt install apt-transport-https -y"
-    ./dist/proot -S . /bin/bash -c "apt install $2 -y"
+    ./dist/proot -S . /bin/bash -c "apt install $dotnet_version -y"
     echo "Starting PteroVM"
     ./dist/proot -S . /bin/bash --login
 fi
