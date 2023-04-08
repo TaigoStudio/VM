@@ -21,7 +21,7 @@ clear
 
 if [[ -f "./installed" ]]; then
     echo "Starting PteroVM"
-    ./dist/proot -S . /bin/bash -c "cd /server && dotnet {dll}.dll"
+    ./dist/proot -S . /bin/bash -c "cd /server && dotnet $1"
     ./dist/proot -S . /bin/bash --login
 else
     echo "Downloading files"
@@ -52,7 +52,7 @@ else
     ./dist/proot -S . /bin/bash -c "dpkg -i packages-microsoft-prod.deb"
     ./dist/proot -S . /bin/bash -c "apt update"
     ./dist/proot -S . /bin/bash -c "apt install apt-transport-https -y"
-    ./dist/proot -S . /bin/bash -c "apt install dotnet-sdk-6.0 -y"
+    ./dist/proot -S . /bin/bash -c "apt install $2 -y"
     echo "Starting PteroVM"
     ./dist/proot -S . /bin/bash --login
 fi
