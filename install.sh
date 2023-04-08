@@ -52,7 +52,7 @@ else
     ./dist/proot -S . /bin/bash -c "dpkg -i packages-microsoft-prod.deb"
     ./dist/proot -S . /bin/bash -c "apt update"
     ./dist/proot -S . /bin/bash -c "apt install apt-transport-https -y"
-    ./dist/proot -S . /bin/bash -c "apt install dotnet-sdk-3.1 -y"
+    ./dist/proot -S . /bin/bash -c "apt install dotnet-sdk-6.0 -y"
     echo "Starting PteroVM"
     ./dist/proot -S . /bin/bash --login
 fi
