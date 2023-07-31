@@ -16,7 +16,7 @@ then
     rsync -a --delete $dir/.git-download/OAT/bin/Debug/net6.0/* $dir
     echo "OAT.Script: Первичная настройка выполнена. Можно запускать"
 else 
-	  echo "OAT.Script: Установка обновления..."
+    echo "OAT.Script: Установка обновления..."
     echo "OAT.Script: Сохраняю старую копию..."
     rm -rf $dir/.git-version-save
     mkdir -p $dir/.git-version-save
